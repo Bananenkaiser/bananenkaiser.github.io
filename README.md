@@ -1,6 +1,6 @@
 # Dominik Tisleric
 
-![Profilbild](profilbild.jpg)
+<img src="profilbild.jpg" alt="Profilbild" width="150">
 
 
 **Data Science Absolvent aus Kleve**
