@@ -7,7 +7,7 @@
   <title>Mein Portfolio</title>
 </head>
 <body>
-  <h1>Mein Name</h1>
+  <h1>Dominik Tisleric</h1>
   <p>Data Science Absolvent aus Kleve. Projekte und Kontaktinformationen sind unten aufgeführt.</p>
   
   <h2>GitHub Projekte</h2>
@@ -17,6 +17,6 @@
   </ul>
   
   <h2>Kontakt</h2>
-  <p>Email: beispiel@email.com</p>
+  <p>Email: dominik@tisleric.com</p>
 </body>
 </html>
