@@ -2,23 +2,25 @@
 
 **Data Science Absolvent aus Kleve**
 
-Willkommen auf meiner Portfolio-Seite! Hier stelle ich einige meiner wichtigsten GitHub-Projekte und Kontaktdaten vor.
+Willkommen auf meiner Portfolio-Seite! Hier stelle ich meine wichtigsten GitHub-Projekte und Kontaktdaten vor.
 
 ## GitHub Projekte
 
-- [Projekt 1](https://github.com/bananenkaiser/projekt1): Kurzbeschreibung (z.B. Analyse von Wetterdaten mit Python)
-- [Projekt 2](https://github.com/bananenkaiser/projekt2): Kurzbeschreibung (z.B. Visualisierung von Filmdaten mit Tableau)
-- [Projekt 3](https://github.com/bananenkaiser/projekt3): Kurzbeschreibung (z.B. Steam-Spiele-Analytics in Jupyter Notebook)
+- [NFL_Data_Bowl_2025](https://github.com/Bananenkaiser/NFL_Data_Bowl_2025): Bachelorarbeit zur Vorhersage, welche NFL-Teams in die Playoffs kommen.
+
+- [Pneumonia_Classification](https://github.com/Bananenkaiser/Pneumonia_Classification): Vorverarbeitung und Klassifizierung von Röntgenbildern mittels ResNet50V2, um automatisch Lungenentzündungen zu erkennen. Fokus auf hohe Sensitivität für den Einsatz in der medizinischen Unterstützung[attached_file:1].
+
+- [xSuccess](https://github.com/Bananenkaiser/xSuccess): Entwicklung eines Machine-Learning-Modells zur Vorhersage der Erfolgswahrscheinlichkeit jeder Aktion im Fußball-Datensatz auf Basis der VAEP-Metrik. Nutzung von StatsBomb-Daten, XGBoost und interpretierbarer ML-Methoden für umfassende Analyse und spielerbasierte Erfolgsmetriken[attached_file:1].
 
 ## Über mich
 
-Ich habe Data Science an der Westfälischen Hochschule Bocholt studiert und interessiere mich für APIs, Machine Learning und Data Visualization[attached_file:1].
+Ich habe Data Science an der Westfälischen Hochschule Bocholt studiert und interessiere mich besonders für Machine Learning, APIs und Data Visualization.
 
 ## Kontakt
 
 - E-Mail: [dominik@tisleric.com](mailto:dominik@tisleric.com)
-- LinkedIn: [Link zu deinem LinkedIn-Profil] (optional)
+- LinkedIn: (optional eintragen)
 
 ---
 
-*Diese Seite wird kontinuierlich aktualisiert. Neue Projekte folgen!* 
+*Die Seite wird regelmäßig aktualisiert – weitere Projekte folgen!*
