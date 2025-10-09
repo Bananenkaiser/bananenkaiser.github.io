@@ -1,5 +1,8 @@
 # Dominik Tisleric
 
+![Profilbild](profilbild.jpg)
+
+
 **Data Science Absolvent aus Kleve**
 
 Willkommen auf meiner Portfolio-Seite! Hier stelle ich meine wichtigsten GitHub-Projekte und Kontaktdaten vor.
