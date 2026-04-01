@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dominik Tisleric</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f7f8fc;
+            --surface: #ffffff;
+            --primary: #5b6cf6;
+            --primary-light: #eef0ff;
+            --text: #1e1e2e;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+            --shadow-hover: 0 4px 12px rgba(91,108,246,0.15), 0 12px 32px rgba(0,0,0,0.08);
+            --radius: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Organic floating blobs */
+        .blob-container {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.07;
+        }
+
+        .blob-1 {
+            width: 640px;
+            height: 640px;
+            background: radial-gradient(circle, #5b6cf6, #a78bfa);
+            top: -220px;
+            right: -80px;
+            animation: float 22s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, #06b6d4, #3b82f6);
+            bottom: 180px;
+            left: -120px;
+            animation: float 28s ease-in-out infinite reverse;
+        }
+
+        .blob-3 {
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, #f59e0b, #ec4899);
+            top: 55%;
+            left: 45%;
+            animation: float 19s ease-in-out infinite 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33%       { transform: translate(28px, -28px) scale(1.05); }
+            66%       { transform: translate(-18px, 18px) scale(0.95); }
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        /* ── Hero ── */
+        .hero {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 6rem 2rem 5rem;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.01em;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 span { color: var(--primary); }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin-bottom: 2.5rem;
+            line-height: 1.75;
+            font-weight: 400;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.75rem;
+            border-radius: 100px;
+            font-size: 0.93rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4a5ce4;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(91,108,246,0.3);
+        }
+
+        .btn-ghost {
+            background: var(--surface);
+            color: var(--text);
+            border: 1.5px solid var(--border);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* ── Sections ── */
+        section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--primary);
+            margin-bottom: 0.6rem;
+        }
+
+        .section-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* ── About ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+
+        .about-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .about-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.65rem;
+        }
+
+        .about-card p {
+            color: var(--text-muted);
+            font-size: 0.93rem;
+            line-height: 1.75;
+        }
+
+        /* ── Projects ── */
+        .projects-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 1.1rem;
+        }
+
+        .project-card {
+            background: var(--surface);
+            padding: 1.75rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            border: 1.5px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-light);
+        }
+
+        .project-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .project-arrow {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            transition: transform 0.2s, color 0.2s;
+        }
+
+        .project-card:hover .project-arrow {
+            transform: translate(3px, -3px);
+            color: var(--primary);
+        }
+
+        .project-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.86rem;
+            line-height: 1.65;
+            flex: 1;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-footer {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .project-lang {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .lang-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .project-stars {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* ── States ── */
+        .state-box {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .loading-spinner {
+            width: 30px;
+            height: 30px;
+            border: 2.5px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.75s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .hero { padding: 3.5rem 1.5rem 3rem; }
+            section { padding: 3rem 1.5rem; }
+            nav { padding: 1.25rem 1.5rem; }
+            .projects-header { flex-direction: column; align-items: flex-start; }
+            .nav-links { gap: 1.25rem; }
+        }
+
+        @media (max-width: 480px) {
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="page">
+
+        <nav>
+            <a href="#" class="nav-logo">DT</a>
+            <ul class="nav-links">
+                <li><a href="#about">Über mich</a></li>
+                <li><a href="#projects">Projekte</a></li>
+                <li><a href="https://github.com/Bananenkaiser" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-tag">Open Source Enthusiast</div>
+            <h1>Hey, ich bin<br><span>Dominik Tisleric</span></h1>
+            <p class="hero-desc">
+                Ich entwickle Software, die funktioniert – und manchmal sogar elegant aussieht.
+                Open Source liegt mir am Herzen.
+            </p>
+            <div class="hero-actions">
+                <a href="https://github.com/Bananenkaiser" target="_blank" rel="noopener" class="btn btn-primary">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub ansehen
+                </a>
+                <a href="#projects" class="btn btn-ghost">Projekte entdecken</a>
+            </div>
+        </div>
+
+        <section id="about">
+            <p class="section-label">Über mich</p>
+            <h2 class="section-title">Wer steckt dahinter?</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>👨‍💻 Was ich mache</h3>
+                    <p>
+                        Ich entwickle Software mit Leidenschaft – von kleinen Tools bis zu größeren Projekten.
+                        Open Source liegt mir am Herzen und ich teile gerne, was ich baue.
+                    </p>
+                </div>
+                <div class="about-card">
+                    <h3>🚀 Was mich antreibt</h3>
+                    <p>
+                        Neue Technologien ausprobieren, Probleme elegant lösen und dabei immer noch dazulernen.
+                        Jedes Projekt ist eine Chance, besser zu werden.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="projects-header">
+                <div>
+                    <p class="section-label">Meine Arbeit</p>
+                    <h2 class="section-title">Projekte</h2>
+                </div>
+                <a href="https://github.com/Bananenkaiser?tab=repositories" target="_blank" rel="noopener"
+                   class="btn btn-ghost" style="font-size:0.85rem;padding:0.6rem 1.2rem;">
+                    Alle ansehen →
+                </a>
+            </div>
+
+            <div class="projects-grid" id="projects-grid">
+                <div class="state-box">
+                    <div class="loading-spinner"></div>
+                    <p>Lade Projekte von GitHub…</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Gebaut von <a href="https://github.com/Bananenkaiser" target="_blank" rel="noopener">Dominik Tisleric</a></p>
+        </footer>
+
+    </div>
+
+    <script>
+        const GITHUB_USERNAME = 'Bananenkaiser';
+
+        const LANG_COLORS = {
+            JavaScript: '#f1e05a', TypeScript: '#2b7489', Python: '#3572A5',
+            Rust: '#dea584', Go: '#00ADD8', Java: '#b07219', CSS: '#563d7c',
+            HTML: '#e34c26', C: '#555555', 'C++': '#f34b7d', Ruby: '#701516',
+            PHP: '#4F5D95', Swift: '#fa7343', Kotlin: '#F18E33', Shell: '#89e051',
+            Vue: '#41b883', Svelte: '#ff3e00', Dart: '#00B4AB', Lua: '#000080',
+        };
+
+        const ICONS = ['📦', '🔧', '🛠️', '💡', '🚀', '⚙️', '🎯', '✨', '🔬', '🗂️', '🖥️', '🌐'];
+
+        async function loadProjects() {
+            const grid = document.getElementById('projects-grid');
+            try {
+                const res = await fetch(
+                    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=18`
+                );
+                if (!res.ok) throw new Error(`GitHub: ${res.status}`);
+                const repos = await res.json();
+
+                const visible = repos.filter(r => !r.fork && !r.archived);
+
+                if (!visible.length) {
+                    grid.innerHTML = '<div class="state-box"><p>Keine öffentlichen Repositories gefunden.</p></div>';
+                    return;
+                }
+
+                grid.innerHTML = visible.map((repo, i) => {
+                    const color = LANG_COLORS[repo.language] || '#9ca3af';
+                    const icon = ICONS[i % ICONS.length];
+                    const desc = repo.description
+                        ? (repo.description.length > 90 ? repo.description.slice(0, 87) + '…' : repo.description)
+                        : 'Keine Beschreibung verfügbar.';
+
+                    return `
+                        <a class="project-card" href="${repo.html_url}" target="_blank" rel="noopener">
+                            <div class="project-card-header">
+                                <div class="project-icon">${icon}</div>
+                                <span class="project-arrow">↗</span>
+                            </div>
+                            <div class="project-name">${repo.name}</div>
+                            <p class="project-desc">${desc}</p>
+                            <div class="project-footer">
+                                ${repo.language ? `
+                                <span class="project-lang">
+                                    <span class="lang-dot" style="background:${color}"></span>
+                                    ${repo.language}
+                                </span>` : ''}
+                                ${repo.stargazers_count > 0 ? `
+                                <span class="project-stars">⭐ ${repo.stargazers_count}</span>` : ''}
+                            </div>
+                        </a>
+                    `;
+                }).join('');
+            } catch (err) {
+                grid.innerHTML = `<div class="state-box"><p>Fehler beim Laden der Projekte.<br><small>${err.message}</small></p></div>`;
+            }
+        }
+
+        loadProjects();
+    </script>
+</body>
+</html>
