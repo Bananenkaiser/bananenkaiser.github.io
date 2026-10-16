@@ -1,612 +1,561 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dominik Tisleric</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #f7f8fc;
-            --surface: #ffffff;
-            --primary: #5b6cf6;
-            --primary-light: #eef0ff;
-            --text: #1e1e2e;
-            --text-muted: #6b7280;
-            --border: #e5e7eb;
-            --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
-            --shadow-hover: 0 4px 12px rgba(91,108,246,0.15), 0 12px 32px rgba(0,0,0,0.08);
-            --radius: 20px;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dominik Tisleric – Data Scientist</title>
+<meta name="description" content="Dominik Tisleric, Data Scientist aus Kleve. Machine Learning, Sports Analytics und LLM-gestützte Datenverarbeitung.">
+<meta name="author" content="Dominik Tisleric">
+<link rel="canonical" href="https://bananenkaiser.github.io/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Dominik Tisleric – Data Scientist">
+<meta property="og:description" content="Machine Learning, Sports Analytics und LLM-gestützte Datenverarbeitung.">
+<meta property="og:url" content="https://bananenkaiser.github.io/">
+<meta property="og:image" content="https://bananenkaiser.github.io/assets/portrait.jpg">
+<meta property="og:locale" content="de_DE">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Dominik Tisleric",
+  "jobTitle": "Data Scientist",
+  "url": "https://bananenkaiser.github.io/",
+  "email": "mailto:dominik@tisleric.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Kleve", "addressCountry": "DE" },
+  "alumniOf": "Westfälische Hochschule",
+  "sameAs": [
+    "https://github.com/Bananenkaiser",
+    "https://www.linkedin.com/in/dominik-tisleric-8a1798229/"
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --text: #1a1c1e;
+    --muted: #5d6266;
+    --faint: #8a8f93;
+    --rule: #e3e1db;
+    --accent: #0e6655;
+    --accent-soft: #e4efeb;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141618;
+      --text: #e7e6e2;
+      --muted: #a3a7aa;
+      --faint: #7b8084;
+      --rule: #2b2e31;
+      --accent: #6cc5b0;
+      --accent-soft: #1d2b28;
+    }
+  }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
+  *, *::before, *::after { box-sizing: border-box; }
 
-        /* Organic floating blobs */
-        .blob-container {
-            position: fixed;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-        }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(70px);
-            opacity: 0.07;
-        }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
 
-        .blob-1 {
-            width: 640px;
-            height: 640px;
-            background: radial-gradient(circle, #5b6cf6, #a78bfa);
-            top: -220px;
-            right: -80px;
-            animation: float 22s ease-in-out infinite;
-        }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
 
-        .blob-2 {
-            width: 420px;
-            height: 420px;
-            background: radial-gradient(circle, #06b6d4, #3b82f6);
-            bottom: 180px;
-            left: -120px;
-            animation: float 28s ease-in-out infinite reverse;
-        }
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color 0.15s, color 0.15s;
+  }
 
-        .blob-3 {
-            width: 320px;
-            height: 320px;
-            background: radial-gradient(circle, #f59e0b, #ec4899);
-            top: 55%;
-            left: 45%;
-            animation: float 19s ease-in-out infinite 6s;
-        }
+  a:hover { color: var(--accent); text-decoration-color: currentColor; }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33%       { transform: translate(28px, -28px) scale(1.05); }
-            66%       { transform: translate(-18px, 18px) scale(0.95); }
-        }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 
-        .page {
-            position: relative;
-            z-index: 1;
-        }
+  .wrap {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
 
-        /* ── Navigation ── */
-        nav {
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+  /* Kopfzeile */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
 
-        .nav-logo {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--text);
-            text-decoration: none;
-            letter-spacing: -0.02em;
-        }
+  .topbar nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .topbar a { text-decoration: none; }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
+  /* Einleitung */
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
+    align-items: end;
+    padding: 4rem 0 3.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
 
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
+  .intro h1 {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 0.35rem;
+  }
 
-        .nav-links a:hover { color: var(--primary); }
+  .role {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin: 0 0 1.5rem;
+  }
 
-        /* ── Hero ── */
-        .hero {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 6rem 2rem 5rem;
-        }
+  .lead {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    max-width: 36rem;
+    margin: 0 0 1.5rem;
+  }
 
-        .hero-inner {
-            display: flex;
-            align-items: center;
-            gap: 5rem;
-        }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.95rem;
+  }
 
-        .hero-content {
-            flex: 1;
-            min-width: 0;
-        }
+  .portrait {
+    width: 9.5rem;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+    filter: saturate(0.9);
+  }
 
-        .hero-image-wrap {
-            flex-shrink: 0;
-        }
+  /* Abschnitte */
+  .section {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    gap: 2rem;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
 
-        .hero-img {
-            width: 260px;
-            height: 260px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center top;
-            border: 4px solid var(--surface);
-            box-shadow: 0 0 0 6px var(--primary-light), var(--shadow);
-            display: block;
-        }
+  .section > h2 {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0.3rem 0 0;
+  }
 
-        .hero-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--primary-light);
-            color: var(--primary);
-            padding: 0.4rem 1rem;
-            border-radius: 100px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.01em;
-        }
+  .section p { margin: 0 0 1rem; }
+  .section p:last-child { margin-bottom: 0; }
 
-        .hero-tag::before {
-            content: '';
-            width: 7px;
-            height: 7px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
+  /* Einträge (Erfahrung, Projekte) */
+  .entries { list-style: none; margin: 0; padding: 0; }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50%       { opacity: 0.5; transform: scale(0.8); }
-        }
+  .entry + .entry { margin-top: 2rem; }
 
-        .hero h1 {
-            font-size: clamp(2.4rem, 5.5vw, 3.8rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 1.25rem;
-        }
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
 
-        .hero h1 span { color: var(--primary); }
+  .entry h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.4;
+  }
 
-        .hero-desc {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 520px;
-            margin-bottom: 2.5rem;
-            line-height: 1.75;
-            font-weight: 400;
-        }
+  .entry h3 a { text-decoration: none; }
+  .entry h3 a:hover { text-decoration: underline; }
 
-        .hero-actions {
-            display: flex;
-            gap: 0.9rem;
-            flex-wrap: wrap;
-        }
+  .date {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--faint);
+    white-space: nowrap;
+  }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1.75rem;
-            border-radius: 100px;
-            font-size: 0.93rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-        }
+  .org { color: var(--muted); margin: 0.1rem 0 0.5rem; }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
+  .entry p { color: var(--text); margin: 0.4rem 0 0; }
 
-        .btn-primary:hover {
-            background: #4a5ce4;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(91,108,246,0.3);
-        }
+  .tags {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.6rem;
+  }
 
-        .btn-ghost {
-            background: var(--surface);
-            color: var(--text);
-            border: 1.5px solid var(--border);
-        }
+  /* Publikation */
+  .pub {
+    border-left: 2px solid var(--accent);
+    padding: 0.25rem 0 0.25rem 1.25rem;
+  }
 
-        .btn-ghost:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
+  .pub-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.45;
+    margin: 0 0 0.5rem;
+  }
 
-        /* ── Sections ── */
-        section {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
+  .pub-cite { color: var(--muted); margin: 0 0 1rem; }
 
-        .section-label {
-            font-size: 0.78rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--primary);
-            margin-bottom: 0.6rem;
-        }
+  .pub-note {
+    background: var(--accent-soft);
+    border-radius: 4px;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    margin: 1.25rem 0;
+  }
 
-        .section-title {
-            font-size: 1.9rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
+  .figures {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.25rem 0;
+    padding: 0;
+    list-style: none;
+  }
 
-        /* ── About ── */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-            margin-top: 2rem;
-        }
+  .figures li { border-top: 1px solid var(--rule); padding-top: 0.6rem; }
 
-        .about-card {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
+  .figures strong {
+    display: block;
+    font-family: var(--mono);
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+  }
 
-        .about-card h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.65rem;
-        }
+  .figures span { font-size: 0.82rem; color: var(--muted); line-height: 1.45; display: block; }
 
-        .about-card p {
-            color: var(--text-muted);
-            font-size: 0.93rem;
-            line-height: 1.75;
-        }
+  .pub-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
 
-        /* ── Projects ── */
-        .projects-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 2rem;
-            gap: 1rem;
-        }
+  /* Kenntnisse */
+  .skills { margin: 0; display: grid; gap: 0.9rem; }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-            gap: 1.1rem;
-        }
+  .skills div {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 1rem;
+  }
 
-        .project-card {
-            background: var(--surface);
-            padding: 1.75rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                        box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            color: inherit;
-            border: 1.5px solid transparent;
-        }
+  .skills dt { color: var(--muted); }
+  .skills dd { margin: 0; }
 
-        .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary-light);
-        }
+  /* Fußzeile */
+  footer {
+    padding: 2rem 0 3rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--faint);
+  }
 
-        .project-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
+  @media (max-width: 720px) {
+    .intro {
+      grid-template-columns: 1fr;
+      padding: 2rem 0 2.5rem;
+      gap: 1.75rem;
+    }
+    .intro picture { order: -1; }
+    .portrait { width: 6.5rem; }
+    .topbar > span { display: none; }
+    .section { grid-template-columns: 1fr; gap: 1.25rem; padding: 2.25rem 0; }
+    .skills div { grid-template-columns: 1fr; gap: 0.1rem; }
+    .figures { grid-template-columns: 1fr; gap: 0.75rem; }
+    .topbar nav { gap: 1rem; }
+  }
 
-        .project-icon {
-            width: 42px;
-            height: 42px;
-            background: var(--primary-light);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-        }
-
-        .project-arrow {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            transition: transform 0.2s, color 0.2s;
-        }
-
-        .project-card:hover .project-arrow {
-            transform: translate(3px, -3px);
-            color: var(--primary);
-        }
-
-        .project-name {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            word-break: break-word;
-        }
-
-        .project-desc {
-            color: var(--text-muted);
-            font-size: 0.86rem;
-            line-height: 1.65;
-            flex: 1;
-            margin-bottom: 1.25rem;
-        }
-
-        .project-footer {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .project-lang {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .lang-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .project-stars {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-        }
-
-        /* ── States ── */
-        .state-box {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-muted);
-        }
-
-        .loading-spinner {
-            width: 30px;
-            height: 30px;
-            border: 2.5px solid var(--border);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 0.75s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* ── Footer ── */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 2rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: 2rem;
-        }
-
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        footer a:hover { text-decoration: underline; }
-
-        /* ── Responsive ── */
-        @media (max-width: 768px) {
-            .about-grid { grid-template-columns: 1fr; }
-            .hero { padding: 3.5rem 1.5rem 3rem; }
-            section { padding: 3rem 1.5rem; }
-            nav { padding: 1.25rem 1.5rem; }
-            .projects-header { flex-direction: column; align-items: flex-start; }
-            .nav-links { gap: 1.25rem; }
-            .hero-inner { flex-direction: column-reverse; gap: 2.5rem; text-align: center; }
-            .hero-img { width: 160px; height: 160px; }
-            .hero-actions { justify-content: center; }
-        }
-
-        @media (max-width: 480px) {
-            .projects-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+  @media print {
+    .topbar nav { display: none; }
+    body { background: #fff; color: #000; }
+  }
+</style>
 </head>
 <body>
+<div class="wrap">
 
-    <div class="blob-container">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
+  <header class="topbar">
+    <span>tisleric</span>
+    <nav aria-label="Seitennavigation">
+      <a href="#erfahrung">Erfahrung</a>
+      <a href="#publikation">Publikation</a>
+      <a href="#projekte">Projekte</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
 
-    <div class="page">
+  <main>
+    <section class="intro" aria-label="Vorstellung">
+      <div>
+        <h1>Dominik Tisleric</h1>
+        <p class="role">Data Scientist · Kleve</p>
+        <p class="lead">
+          Ich arbeite an Modellen, die aus unstrukturierten und zeitlich
+          aufgelösten Daten belastbare Aussagen machen, zuletzt mit LLM-gestützter
+          Informationsextraktion und probabilistischen Modellen in der Sportanalyse.
+        </p>
+        <ul class="links">
+          <li><a href="mailto:dominik@tisleric.com">dominik@tisleric.com</a></li>
+          <li><a href="https://www.linkedin.com/in/dominik-tisleric-8a1798229/" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/Bananenkaiser" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+      <picture>
+        <source srcset="assets/portrait.webp" type="image/webp">
+        <img class="portrait" src="assets/portrait.jpg" width="480" height="600" alt="Porträt von Dominik Tisleric">
+      </picture>
+    </section>
 
-        <nav>
-            <a href="#" class="nav-logo">DT</a>
-            <ul class="nav-links">
-                <li><a href="#about">Über mich</a></li>
-                <li><a href="#projects">Projekte</a></li>
-                <li><a href="https://github.com/Bananenkaiser" target="_blank" rel="noopener">GitHub</a></li>
-            </ul>
-        </nav>
+    <section class="section" id="profil">
+      <h2>Profil</h2>
+      <div>
+        <p>
+          Bachelor in Data Science an der Westfälischen Hochschule. Davor neun Jahre
+          bei der Bundeswehr. Mich interessiert vor allem, wie gut ein Modell kalibriert
+          ist und ob seine Vorhersagen in der Praxis tragen, nicht nur seine Trefferquote
+          auf dem Testset.
+        </p>
+        <p>
+          Schwerpunkte sind Machine Learning auf tabellarischen und Ereignisdaten,
+          Computer Vision sowie die Einbindung von Sprachmodellen in Datenpipelines.
+        </p>
+      </div>
+    </section>
 
-        <div class="hero">
-            <div class="hero-inner">
-                <div class="hero-content">
-                    <div class="hero-tag">Open Source Enthusiast</div>
-                    <h1>Hey, ich bin<br><span>Dominik Tisleric</span></h1>
-                    <p class="hero-desc">
-                        Ich entwickle Software, die funktioniert – und manchmal sogar elegant aussieht.
-                        Open Source liegt mir am Herzen.
-                    </p>
-                    <div class="hero-actions">
-                        <a href="https://github.com/Bananenkaiser" target="_blank" rel="noopener" class="btn btn-primary">
-                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                            GitHub ansehen
-                        </a>
-                        <a href="#projects" class="btn btn-ghost">Projekte entdecken</a>
-                    </div>
-                </div>
-                <div class="hero-image-wrap">
-                    <img src="profilbild.jpg" alt="Dominik Tisleric" class="hero-img">
-                </div>
-            </div>
+    <section class="section" id="erfahrung">
+      <h2>Erfahrung</h2>
+      <ol class="entries">
+        <li class="entry">
+          <div class="entry-head">
+            <h3>Data Scientist</h3>
+            <span class="date">aktuell</span>
+          </div>
+          <div class="org">Trinkkontor GmbH, Duisburg</div>
+          <p>
+            Digitalisierung interner Abläufe: Bisher wurden Excel-Tabellen per E-Mail an
+            eine Abteilung geschickt, die die Daten von Hand in die Datenbank übertrug.
+            Künftig erfasst eine Webanwendung die Daten und schreibt sie per API direkt in
+            die Datenbank. Der Zwischenschritt entfällt, der Prozess wird schneller und
+            weniger fehleranfällig.
+          </p>
+        </li>
+        <li class="entry">
+          <div class="entry-head">
+            <h3>Data Scientist</h3>
+          </div>
+          <div class="org">nicmatec GmbH</div>
+          <p>
+            System zur automatischen Erkennung, Extraktion und Bewertung öffentlicher
+            Ausschreibungen aus dem EU-Amtsblatt (TED): ETL-Pipeline, Textfilterung,
+            LLM-Extraktion mit strukturierten Ausgaben (Pydantic), regelbasierte
+            Bewertung und Geofencing. Prompt- und Token-Optimierung für den laufenden Betrieb.
+          </p>
+          <div class="tags">Python · OpenAI API · FastAPI · MongoDB · Docker · Playwright</div>
+        </li>
+        <li class="entry">
+          <div class="entry-head">
+            <h3>B.Sc. Data Science</h3>
+            <span class="date">2022 – 2025</span>
+          </div>
+          <div class="org">Westfälische Hochschule, Bocholt</div>
+          <p>
+            Bachelorarbeit: Klassifikation von NFL-Teams anhand von Risiko- und
+            Ertragsmetriken aus Tracking-Daten.
+          </p>
+        </li>
+        <li class="entry">
+          <div class="entry-head">
+            <h3>Stabsunteroffizier, IT-Systemelektroniker</h3>
+            <span class="date">2013 – 2022</span>
+          </div>
+          <div class="org">Bundeswehr, Marine</div>
+          <p>
+            Betreuung der IT-Anlage an Bord eines Schiffes. Verantwortlich für Wartung
+            und Instandsetzung der Flugfunkanlage.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section" id="publikation">
+      <h2>Publikation</h2>
+      <article class="pub">
+        <p class="pub-title">
+          Beyond Outcome Bias: Incorporating Action Completion Probability and
+          Risk-Return Into Soccer Evaluation Models
+        </p>
+        <p class="pub-cite">
+          Paul, Y., Klemp, M. &amp; Memmert, D. (2026). In <i>Machine Learning and
+          Data Mining for Sports Analytics</i>, CCIS 2833, S. 48–61. Springer.
+        </p>
+        <p>
+          Aktionsbewertungen im Fußball wie VAEP lernen aus dem tatsächlichen Ausgang
+          einer Aktion und belohnen damit riskante Pässe, die zufällig ankommen. Das
+          Paper trennt die Erfolgswahrscheinlichkeit einer Aktion (xSuccess) von ihrem
+          strategischen Wert und gewichtet VAEP entsprechend. Grundlage sind StatsBomb-Daten
+          der fünf großen europäischen Ligen 2015/16.
+        </p>
+        <ul class="figures">
+          <li><strong>3,6 Mio.</strong><span>Aktionen aus 1.823 Spielen</span></li>
+          <li><strong>0,067</strong><span>Brier Score xSuccess (Baseline 0,094)</span></li>
+          <li><strong>0,95</strong><span>ROC-AUC xSuccess</span></li>
+        </ul>
+        <p class="pub-note">
+          Mein Beitrag: Mitarbeit an der Entwicklung und ersten Implementierung des
+          xSuccess-Modells, in der Danksagung der Autoren genannt.
+        </p>
+        <div class="pub-links">
+          <a href="https://doi.org/10.1007/978-3-032-15165-0_4" rel="noopener">DOI 10.1007/978-3-032-15165-0_4</a>
+          <a href="https://github.com/yannikpaul/beyond-outcome-bias" rel="noopener">Code</a>
         </div>
+      </article>
+    </section>
 
-        <section id="about">
-            <p class="section-label">Über mich</p>
-            <h2 class="section-title">Wer steckt dahinter?</h2>
-            <div class="about-grid">
-                <div class="about-card">
-                    <h3>👨‍💻 Was ich mache</h3>
-                    <p>
-                        Ich entwickle Software mit Leidenschaft – von kleinen Tools bis zu größeren Projekten.
-                        Open Source liegt mir am Herzen und ich teile gerne, was ich baue.
-                    </p>
-                </div>
-                <div class="about-card">
-                    <h3>🚀 Was mich antreibt</h3>
-                    <p>
-                        Neue Technologien ausprobieren, Probleme elegant lösen und dabei immer noch dazulernen.
-                        Jedes Projekt ist eine Chance, besser zu werden.
-                    </p>
-                </div>
-            </div>
-        </section>
+    <section class="section" id="projekte">
+      <h2>Projekte</h2>
+      <ul class="entries">
+        <li class="entry">
+          <div class="entry-head">
+            <h3><a href="https://github.com/Bananenkaiser/NFL_Data_Bowl_2025" rel="noopener">Risiko und Ertrag in der NFL</a></h3>
+            <span class="date">Bachelorarbeit</span>
+          </div>
+          <p>
+            Risiko- und Ertragsmetriken auf Spielzugebene aus den Tracking-Daten des
+            NFL Big Data Bowl 2025, aggregiert auf Teamebene. Vorhersage der
+            Playoff-Teilnahme und Clustering der Teamstrategien.
+          </p>
+          <div class="tags">SVM · Explainable Boosting Machines · Feature-Selektion · Tracking-Daten</div>
+        </li>
+        <li class="entry">
+          <div class="entry-head">
+            <h3><a href="https://github.com/Bananenkaiser/CatFeederAI" rel="noopener">CatFeederAI</a></h3>
+            <span class="date">Computer Vision</span>
+          </div>
+          <p>
+            Erkennt am Futternapf, welche von zwei Katzen frisst, und verbindet das mit
+            Waagendaten zur gefressenen Menge. Zweistufig: YOLOv8 zur Detektion,
+            MobileNetV2 zur Klassifikation, 94,9 % Validierungsgenauigkeit.
+            Läuft auf einem Raspberry Pi.
+          </p>
+          <div class="tags">PyTorch · YOLOv8 · Transfer Learning · OpenCV · PostgreSQL</div>
+        </li>
+        <li class="entry">
+          <div class="entry-head">
+            <h3><a href="https://github.com/Bananenkaiser/JobPilot" rel="noopener">JobPilot</a></h3>
+            <span class="date">LLM-Anwendung</span>
+          </div>
+          <p>
+            Bewertet Stellenanzeigen per Sprachmodell gegen den eigenen Lebenslauf
+            (Passung, Stärken, Lücken). Ein einmalig erzeugtes Kandidatenprofil ersetzt
+            das PDF in jeder Anfrage und senkt den Tokenverbrauch um rund 75 %.
+          </p>
+          <div class="tags">Claude API · Streamlit · MongoDB · Playwright · Docker</div>
+        </li>
+        <li class="entry">
+          <div class="entry-head">
+            <h3><a href="https://github.com/Bananenkaiser/AYTO" rel="noopener">Are You The One: Solver</a></h3>
+            <span class="date">Kombinatorik</span>
+          </div>
+          <p>
+            Constraint-Solver und Monte-Carlo-Simulation, die aus den Hinweisen einer
+            Staffel die verbleibenden möglichen Paarungen und ihre Wahrscheinlichkeiten
+            bestimmen.
+          </p>
+          <div class="tags">Constraint Satisfaction · Monte Carlo · NumPy</div>
+        </li>
+        <li class="entry">
+          <div class="entry-head">
+            <h3><a href="https://github.com/Bananenkaiser/Pneumonia_Classification" rel="noopener">Pneumonie-Erkennung auf Röntgenbildern</a></h3>
+            <span class="date">Deep Learning</span>
+          </div>
+          <p>
+            Fine-Tuning von ResNet50V2 nach Kontrastverstärkung (CLAHE) und Maskierung
+            der Lungenflügel. Optimiert auf hohe Sensitivität, um übersehene Befunde
+            zu minimieren.
+          </p>
+          <div class="tags">TensorFlow · Keras · OpenCV</div>
+        </li>
+      </ul>
+    </section>
 
-        <section id="projects">
-            <div class="projects-header">
-                <div>
-                    <p class="section-label">Meine Arbeit</p>
-                    <h2 class="section-title">Projekte</h2>
-                </div>
-                <a href="https://github.com/Bananenkaiser?tab=repositories" target="_blank" rel="noopener"
-                   class="btn btn-ghost" style="font-size:0.85rem;padding:0.6rem 1.2rem;">
-                    Alle ansehen →
-                </a>
-            </div>
+    <section class="section" id="kenntnisse">
+      <h2>Kenntnisse</h2>
+      <dl class="skills">
+        <div><dt>Sprachen und Analyse</dt><dd>Python, SQL, pandas, NumPy, SciPy, statsmodels</dd></div>
+        <div><dt>Machine Learning</dt><dd>scikit-learn, XGBoost, PyTorch, TensorFlow/Keras, InterpretML</dd></div>
+        <div><dt>Sprachmodelle</dt><dd>OpenAI- und Anthropic-API, Structured Output, Pydantic, Prompt Engineering</dd></div>
+        <div><dt>Daten und Betrieb</dt><dd>PostgreSQL, MongoDB, FastAPI, Docker, Playwright, Git</dd></div>
+      </dl>
+    </section>
 
-            <div class="projects-grid" id="projects-grid">
-                <div class="state-box">
-                    <div class="loading-spinner"></div>
-                    <p>Lade Projekte von GitHub…</p>
-                </div>
-            </div>
-        </section>
+    <section class="section" id="kontakt">
+      <h2>Kontakt</h2>
+      <div>
+        <p>
+          Am einfachsten per E-Mail an
+          <a href="mailto:dominik@tisleric.com">dominik@tisleric.com</a>
+          oder über <a href="https://www.linkedin.com/in/dominik-tisleric-8a1798229/" rel="noopener">LinkedIn</a>.
+        </p>
+      </div>
+    </section>
+  </main>
 
-        <footer>
-            <p>Gebaut von <a href="https://github.com/Bananenkaiser" target="_blank" rel="noopener">Dominik Tisleric</a></p>
-        </footer>
+  <footer>
+    © 2026 Dominik Tisleric
+  </footer>
 
-    </div>
-
-    <script>
-        const GITHUB_USERNAME = 'Bananenkaiser';
-
-        const LANG_COLORS = {
-            JavaScript: '#f1e05a', TypeScript: '#2b7489', Python: '#3572A5',
-            Rust: '#dea584', Go: '#00ADD8', Java: '#b07219', CSS: '#563d7c',
-            HTML: '#e34c26', C: '#555555', 'C++': '#f34b7d', Ruby: '#701516',
-            PHP: '#4F5D95', Swift: '#fa7343', Kotlin: '#F18E33', Shell: '#89e051',
-            Vue: '#41b883', Svelte: '#ff3e00', Dart: '#00B4AB', Lua: '#000080',
-        };
-
-        const ICONS = ['📦', '🔧', '🛠️', '💡', '🚀', '⚙️', '🎯', '✨', '🔬', '🗂️', '🖥️', '🌐'];
-
-        async function loadProjects() {
-            const grid = document.getElementById('projects-grid');
-            try {
-                const res = await fetch(
-                    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=18`
-                );
-                if (!res.ok) throw new Error(`GitHub: ${res.status}`);
-                const repos = await res.json();
-
-                const visible = repos.filter(r => !r.fork && !r.archived);
-
-                if (!visible.length) {
-                    grid.innerHTML = '<div class="state-box"><p>Keine öffentlichen Repositories gefunden.</p></div>';
-                    return;
-                }
-
-                grid.innerHTML = visible.map((repo, i) => {
-                    const color = LANG_COLORS[repo.language] || '#9ca3af';
-                    const icon = ICONS[i % ICONS.length];
-                    const desc = repo.description
-                        ? (repo.description.length > 90 ? repo.description.slice(0, 87) + '…' : repo.description)
-                        : 'Keine Beschreibung verfügbar.';
-
-                    return `
-                        <a class="project-card" href="${repo.html_url}" target="_blank" rel="noopener">
-                            <div class="project-card-header">
-                                <div class="project-icon">${icon}</div>
-                                <span class="project-arrow">↗</span>
-                            </div>
-                            <div class="project-name">${repo.name}</div>
-                            <p class="project-desc">${desc}</p>
-                            <div class="project-footer">
-                                ${repo.language ? `
-                                <span class="project-lang">
-                                    <span class="lang-dot" style="background:${color}"></span>
-                                    ${repo.language}
-                                </span>` : ''}
-                                ${repo.stargazers_count > 0 ? `
-                                <span class="project-stars">⭐ ${repo.stargazers_count}</span>` : ''}
-                            </div>
-                        </a>
-                    `;
-                }).join('');
-            } catch (err) {
-                grid.innerHTML = `<div class="state-box"><p>Fehler beim Laden der Projekte.<br><small>${err.message}</small></p></div>`;
-            }
-        }
-
-        loadProjects();
-    </script>
+</div>
 </body>
 </html>
